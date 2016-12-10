@@ -1,0 +1,67 @@
+<!--<?php include('include/sessionAndCookies.php');?>-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Minichat</title>
+        <link rel='stylesheet' href='style.css'/> 
+        <style>
+            form {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="minichatpost.php" method="post">
+            <p>
+                <label for="pseudo">Pseudo</label> : <input type="text" name="pseudo" id="pseudo"/><br>
+                <label for="message">Message</label> : <input type="text" name="message" id="message"/><br>
+                <input type="submit" value="Envoyer">
+            </p>
+            
+        </form>
+        <div id="messages"></div>
+        
+        <script src="jquery.js"></script>
+        <script>
+            $(function() {
+                $.get('minichatgetmessages.php', function(data) {
+                    $('#messages').html(data);
+                    var jsonObject = JSON.parse(data);
+                    for(var key in jsonObject) {
+                        if(jsonObject.hasOwnProperty(key)) {
+                            var pseudo = jsonObject[key]['pseudo'];
+                            var message = jsonObject[key]['message'];
+                            $('#contenu').append('<strong>' + pseudo + '</strong> : ' + message + '<br>');
+                        }
+                    }
+                });
+            });
+        </script>
+
+        
+        <div id="contenu">
+<!--            <h1>Mini chat</h1>
+            <p>Les messages</p>
+            <p>
+                <?php
+                include('minichatgetmessages.php');
+                $data = getMinichatData();
+                echo print_r($data);
+                echo('<br>');
+                echo('<br>la chaine en json');
+                $json = json_encode($data);
+                echo $json;
+                echo('<br>');
+                echo('<br>la chaine products en json');
+                $products = getProducts();
+                $productsJson = getProductsJson();
+                echo print_r($products);
+                echo('<br>');
+                echo($productsJson);
+                ?>
+            </p>-->
+        </div>
+
+    </body>
+</html>
