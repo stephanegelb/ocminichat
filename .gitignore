@@ -1,2 +1,4 @@
 /db/db.xml
+/db/.htpasswd
+/products/.htpasswd
 /nbproject/private/
