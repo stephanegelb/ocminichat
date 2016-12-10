@@ -17,16 +17,14 @@
                 <label for="pseudo">Pseudo</label> : <input type="text" name="pseudo" id="pseudo"/><br>
                 <label for="message">Message</label> : <input type="text" name="message" id="message"/><br>
                 <input type="submit" value="Envoyer">
-            </p>
-            
+            </p>        
         </form>
-        <div id="messages"></div>
         
         <script src="jquery.js"></script>
         <script>
             $(function() {
                 $.get('minichatgetmessages.php', function(data) {
-                    $('#messages').html(data);
+                    $('#contenu').html('');
                     var jsonObject = JSON.parse(data);
                     for(var key in jsonObject) {
                         if(jsonObject.hasOwnProperty(key)) {
@@ -39,29 +37,6 @@
             });
         </script>
 
-        
-        <div id="contenu">
-<!--            <h1>Mini chat</h1>
-            <p>Les messages</p>
-            <p>
-                <?php
-                include('minichatgetmessages.php');
-                $data = getMinichatData();
-                echo print_r($data);
-                echo('<br>');
-                echo('<br>la chaine en json');
-                $json = json_encode($data);
-                echo $json;
-                echo('<br>');
-                echo('<br>la chaine products en json');
-                $products = getProducts();
-                $productsJson = getProductsJson();
-                echo print_r($products);
-                echo('<br>');
-                echo($productsJson);
-                ?>
-            </p>-->
-        </div>
-
+        <div id="contenu">Loading messages...</div>
     </body>
 </html>
